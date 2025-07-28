@@ -1,133 +1,170 @@
-.upload-outer {
+.uploadOuter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 0;
+  background: #fff;
+  box-sizing: border-box;
+  margin: 0 auto;
   padding: 0;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  height: auto;
 }
 
-.upload-dropzone {
-  width: 100%;
-  height: 100%;
-  max-width: 900px;
-  max-height: 60vh;
+.uploadOuterEmpty {
+  justify-content: center;
+  min-height: 500px;
+  align-items: center;
+}
+
+.uploadOuterWithFiles {
+  justify-content: flex-start;
+  min-height: auto;
+  align-items: center;
+}
+
+.uploadDropzone {
+  width: 90%;
+  min-width: 800px;
+  max-width: 1900px;
   background: #fcf6e4;
   border: 2px dashed #b6a97a;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin: 0 auto 8px auto;
   transition: border 0.2s, background 0.2s;
   text-align: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-.upload-dropzone:hover {
+
+.uploadDropzoneLarge {
+  min-height: 350px;
+  height: 400px;
+  max-height: 60vh;
+  margin: 20px auto 30px auto;
+}
+
+.uploadDropzoneCompact {
+  min-height: 120px;
+  height: 140px;
+  margin: 10px auto 20px auto;
+}
+
+.uploadDropzone:hover {
   border-color: #a89c6a;
   background: #f3e3a7;
 }
-.upload-icon {
-  margin-bottom: 18px;
+
+.uploadIcon {
+  margin-bottom: 24px;
 }
-.upload-text {
-  color: #222;
-  font-size: 1.18rem;
+
+.uploadText {
+  color: #333;
+  font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  padding: 0 20px;
+  text-align: center;
 }
-.upload-browse {
-  color: #222;
-  font-size: 1.18rem;
+
+.uploadFilesList {
+  width: 90%;
+  min-width: 800px;
+  max-width: 1900px;
+  margin: 20px auto 12px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: transparent;
+  border-radius: 8px;
+  padding: 4px 0;
+}
+
+.uploadFileItem {
+  display: flex;
+  align-items: center;
+  background: #f6eac2;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 1.05rem;
   font-weight: 500;
-  text-decoration: underline;
+  color: #222;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  gap: 12px;
+  position: relative;
+  min-height: 48px;
+}
+
+.uploadFileName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uploadFileType {
+  background: #b6a97a;
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-left: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.uploadFileStatus {
+  color: #b6a97a;
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.uploadFileDeleteBtn {
+  background: none;
+  border: none;
+  padding: 0 0 0 8px;
+  margin-left: 8px;
   cursor: pointer;
-  margin-bottom: 0;
-  transition: color 0.18s;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
 }
-.upload-browse:hover {
-  color: #b6a97a;
+
+.uploadFileDeleteBtn:hover {
+  opacity: 1;
+  color: #d00;
 }
-.upload-placeholder {
-  color: #b6a97a;
-  font-size: 1.08rem;
-  font-weight: 500;
-  opacity: 0.85;
-}
-.upload-preview {
-  max-width: 320px;
-  max-height: 100px;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  object-fit: contain;
-}
-.upload-pdf-preview {
-  color: #b6a97a;
-  font-size: 1.08rem;
-  font-weight: 500;
-  opacity: 0.85;
-  padding: 16px 0;
-}
-.upload-error {
-  color: #c00;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-.upload-scan-btn {
+
+.uploadScanBtn {
   margin-top: 8px;
-  padding: 10px 24px;
-  font-size: 1rem;
+  padding: 12px 28px;
+  font-size: 1.05rem;
   background: #f7e7c4;
   border: 1px solid #d1b97a;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s, border 0.2s;
+  align-self: center;
 }
-.upload-scan-btn:disabled {
+
+.uploadScanBtn:disabled {
   background: #eee;
   border: 1px solid #ccc;
   color: #aaa;
   cursor: not-allowed;
 }
 
-.upload-files-list {
-  width: 100%;
-  max-width: 900px;
-  margin: 12px auto 8px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-height: 240px;
-  overflow-y: auto;
-  background: transparent;
-  border-radius: 6px;
-}
-.upload-file-item {
-  display: flex;
-  align-items: center;
-  background: #f6eac2;
-  border-radius: 6px;
-  padding: 6px 14px;
-  font-size: 1.02rem;
+.uploadMessage {
+  color: #dc2626;
+  margin-top: 8px;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: #222;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  gap: 10px;
-}
-.upload-file-name {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.upload-file-type {
-  color: #b6a97a;
-  font-size: 0.98rem;
-  font-weight: 600;
-  margin-left: 8px;
+  text-align: center;
 }

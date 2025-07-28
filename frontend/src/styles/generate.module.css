@@ -1,52 +1,15 @@
-/* Generate Sheet Container */
-.generate-sheet-outer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100dvh;
-  width: 100vw;
-  background: #f6f3ed;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.page-content-top {
+  margin-top: 0;
 }
 
-.generate-sheet-container {
-  display: flex;
-  width: 95vw;
-  max-width: 1400px;
-  height: 700px;
-  background: #fff;
-  box-sizing: border-box;
-  border: 0.5px solid #000000;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
-  overflow: hidden;
-  min-width: 0;
-  min-height: 0;
-}
-
-/* Generate Sheet Main Contents */
 .generate-sheet-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  height: 100%;
-  padding: 24px 40px 8px 24px;
-  flex: 1 1 0;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .generate-sheet-scrollable {
-  flex: 1 1 0;
-  min-height: 0;
   width: 100%;
-  overflow-y: auto;
-  padding-right: 12px;
-  scrollbar-width: thin;
-  scrollbar-color: #b6a97a #faf9f7;
-  scrollbar-gutter: stable;
 }
 .generate-sheet-scrollable::-webkit-scrollbar {
   width: 7px;
@@ -74,22 +37,24 @@
   margin-bottom: 20px;
   display: flex;
   align-items: flex-end;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 2.5px solid #b6a97a;
   width: 100%;
   position: relative;
   background: transparent;
-  justify-content: space-between;
+  justify-content: flex-start;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .generate-sheet-nav-btn {
-  flex: 1 1 0;
+  flex: 0 1 auto;
   text-align: center;
-  background: #fff;
+  background: transparent;
   border: none;
   border-radius: 0;
-  padding: 0 0 0 0;
+  padding: 0 36px;
   font-size: 1.13rem;
-  font-weight: 400;
+  font-weight: 500;
   color: #222;
   cursor: pointer;
   transition: color 0.2s, font-weight 0.2s;
@@ -100,11 +65,13 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  background: none;
 }
 
 .generate-sheet-nav-btn.active {
-  font-weight: 600;
+  font-weight: 700;
   color: #181818;
+  background: transparent;
 }
 
 .generate-sheet-nav-btn.active::after {
@@ -112,11 +79,10 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1.5px;
-  height: 2px;
-  background: #181818;
+  bottom: -2.5px;
+  height: 3px;
+  background: #b6a97a;
   border-radius: 2px;
-  transform: translateY(50%);
   z-index: 2;
   pointer-events: none;
 }
@@ -210,6 +176,7 @@ textarea.input {
   cursor: pointer;
   transition: background 0.2s, border 0.2s;
   box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  margin-bottom: 16px;
 }
 .generate-sheet-create-btn:hover {
   background: #f3e3a7;

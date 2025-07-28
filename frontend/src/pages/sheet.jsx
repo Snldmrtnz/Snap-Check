@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import '../styles/sidebar.css';
+import Layout from '../components/layout';
+import Sidebar from '../components/sidebar';
 import styles from '../styles/sheet.module.css';
 
 function AnswerSheet() {
@@ -15,6 +16,12 @@ function AnswerSheet() {
   const location = useLocation();
   
   const examOptions = ['MIDTERM EXAMINATION', 'FINAL EXAMINATION', 'SHORT QUIZ', 'LONG QUIZ'];
+  
+  const isFormValid = examType.trim() !== '' && 
+                     subjectName.trim() !== '' && 
+                     testDirections.trim() !== '' && 
+                     numItems.trim() !== '' && 
+                     numChoices.trim() !== '';
   
   const handleExamTypeSelect = (value) => {
     setExamType(value);
@@ -33,6 +40,11 @@ function AnswerSheet() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!isFormValid) {
+      return;
+    }
+    
     navigate('/generate', {
       state: {
         id: Date.now().toString(),
@@ -97,16 +109,13 @@ function AnswerSheet() {
   }, [showDropdown, showChoicesDropdown]);
 
   return (
-    <div className={styles['answer-sheet-outer']}>
-      <div className={styles['answer-sheet-container']}>
-        <aside className="sidebar">
-          <h2>Dashboard</h2>
-          <button className="new-answer-sheet-btn" onClick={handleNewAnswerSheet}>+ New Answer Sheet</button>
-        </aside>
-        <main className={styles['answer-sheet-content']}>
-          <h2 className={styles['answer-sheet-title']}>Create Answer Sheet</h2>
-          <div className={styles['answer-sheet-scrollable']}>
-            <form className={styles['answer-sheet-form']} onSubmit={handleSubmit} autoComplete="off">
+    <Layout 
+      title="Create Answer Sheet"
+      sidebar={<Sidebar title="Dashboard" onNewSheet={handleNewAnswerSheet} />}
+    >
+      <div className={styles['answer-sheet-content']}>
+        <div className={styles['answer-sheet-scrollable']}>
+          <form className={styles['answer-sheet-form']} onSubmit={handleSubmit} autoComplete="off">
               <div className={styles['answer-sheet-row']}>
                 <div className={styles['answer-sheet-col']}>
                   <label htmlFor="examType">Exam Type<span className={styles['required']}>*</span></label>
@@ -164,7 +173,7 @@ function AnswerSheet() {
                 </div>
               </div>
               <div className={styles['form-group']}>
-              <label htmlFor="testDirections">Test Directions</label>
+              <label htmlFor="testDirections">Test Directions<span className={styles['required']}>*</span></label>
               <textarea 
                   className={styles['input']} 
                 id="testDirections" 
@@ -174,6 +183,7 @@ function AnswerSheet() {
                 value={testDirections}
                 onChange={e => setTestDirections(e.target.value)}
                   autoComplete="off"
+                  required
               />
             </div>  
               <div className={styles['answer-sheet-row']}>
@@ -226,13 +236,22 @@ function AnswerSheet() {
                 </div>
               </div>
               <div className={styles['answer-sheet-btn-row']}>
-                <button className={styles['answer-sheet-create-btn']} type="submit">Create Answer Sheet</button>
+                <button 
+                  className={styles['answer-sheet-create-btn']} 
+                  type="submit" 
+                  disabled={!isFormValid}
+                  style={{
+                    opacity: isFormValid ? 1 : 0.6,
+                    cursor: isFormValid ? 'pointer' : 'not-allowed'
+                  }}
+                >
+                  Create Answer Sheet
+                </button>
               </div>
             </form>
-            </div>
-        </main>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
 
