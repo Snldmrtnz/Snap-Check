@@ -1,4 +1,4 @@
-// npm install
+# npm install
 react-router-dom
 jspdf jspdf-autotable
 tesseract.js
