@@ -1,3 +1,4 @@
+# Updated on December 6, 2025
 import os
 import io
 import cv2
@@ -9,9 +10,15 @@ import pytesseract
 import base64
 import json
 import fitz
+from supabase import create_client
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+# Supabase configuration
+SUPABASE_URL = "https://mokpviqoctidtpwdihax.supabase.co"
+SUPABASE_KEY = "sb_secret_KcrDXUkPQq8_CPNGcXqQug_-xfgVjol"  # Replace with env var in production
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @app.route('/')
 def health_check():
@@ -104,6 +111,14 @@ def detect_bubbles(img, bubble_coords, threshold=0.5):
         else:
             answers.append(None)
     return answers
+
+@app.route('/api/results', methods=['GET'])
+def get_results():
+    try:
+        response = supabase.table('exam_results').select('*').order('created_at', desc=True).limit(100).execute()
+        return jsonify(response.data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/api/check', methods=['POST'])
 def check_sheet():
@@ -241,6 +256,16 @@ def check_sheet():
 
     annotated_b64 = image_to_base64(annotated)
 
+    try:
+        supabase.table('exam_results').insert({
+            "name": name,
+            "section": section,  
+            "score": score,
+            "item_results": item_results
+        }).execute()
+    except Exception as e:
+        print(f"Failed to save to Supabase: {e}")
+
     return jsonify({
         'name': name,
         'section': section,
@@ -250,4 +275,4 @@ def check_sheet():
     })
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False) 
+    app.run(host='0.0.0.0', port=port, debug=False)

@@ -1,3 +1,4 @@
+// Updated on December 6, 2025
 {
   "name": "frontend",
   "private": true,
@@ -11,11 +12,11 @@
     "vercel-build": "vite build"
   },
   "dependencies": {
-    "jspdf": "^3.0.1",
+    "jspdf": "^3.0.4",
     "jspdf-autotable": "^5.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.7.1",
+    "react-router-dom": "^7.9.6",
     "tesseract.js": "^6.0.1"
   },
   "devDependencies": {
